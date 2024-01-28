@@ -146,7 +146,3 @@ docker-compose.override.yml
 
 # PEM files
 *.pem
-
-# Media and stroage configs
-api/media.yml
-api/storage.yml

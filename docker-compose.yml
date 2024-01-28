@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  micro-notif:
+    restart: always
+    image: ${DOCKER_REGISTRY-}micro-notif:latest
+    build:
+      context: ./micro_notif
+      dockerfile: Dockerfile
+    env_file:
+      - ./micro_notif/prod.env

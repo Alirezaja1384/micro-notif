@@ -2,6 +2,6 @@
 
 
 ### TODO:
-- [ ] SMS.
+- [x] SMS.
 - [ ] Email.
 - [ ] Push notification.
