@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "micro-notif"
+version = "0.1.0"
+description = ""
+authors = ["Alireza Jafari <alirezaja1384@gmail.com>"]
+readme = "README.md"
+packages = [{ include = "micro_notif" }]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+aio-pika = "^9.4.0"
+python-decouple = "^3.8"
+aio-kavenegar = "^2.0.1"
+pydantic = "^2.5.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
