@@ -2,15 +2,8 @@ version: '3.8'
 
 services:
   micro-notif:
-    restart: always
-    image: ${DOCKER_REGISTRY-}micro-notif:latest
     networks:
       - some-rabbit-network
-    build:
-      context: ./micro_notif
-      dockerfile: Dockerfile
-    env_file:
-      - ./micro_notif/prod.env
 
 networks:
   some-rabbit-network:
