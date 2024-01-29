@@ -4,7 +4,7 @@ from aio_pika import ExchangeType
 from aio_pika.abc import AbstractChannel, AbstractIncomingMessage
 from pydantic import ValidationError
 from micro_notif.schemas.sms import SMSEvent
-from micro_notif.settings import RABBITMQ_EXCHANGE
+from micro_notif.settings import RABBITMQ_EXCHANGE, RABBITMQ_DURABLE
 from micro_notif.notifiers import get_sms_notifier
 from micro_notif.utils import mask_str
 
@@ -47,13 +47,17 @@ async def listen_for_events(channel: AbstractChannel):
     }
 
     exchange = await channel.declare_exchange(
-        name=RABBITMQ_EXCHANGE, type=ExchangeType.DIRECT
+        name=RABBITMQ_EXCHANGE,
+        type=ExchangeType.DIRECT,
+        durable=RABBITMQ_DURABLE,
     )
 
     for notif_type, handler in notif_handlers.items():
         routing_key = f"{BASE_ROUTING_KEY}.{notif_type}"
 
-        queue = await channel.declare_queue(routing_key)
+        queue = await channel.declare_queue(
+            routing_key, durable=RABBITMQ_DURABLE
+        )
 
         await queue.bind(exchange=exchange.name, routing_key=routing_key)
         await queue.consume(handler)

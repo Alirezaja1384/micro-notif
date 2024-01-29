@@ -2,6 +2,10 @@ from typing import cast
 from decouple import config
 
 DEBUG = cast(bool, config("DEBUG", cast=bool, default=False))
+
+RABBITMQ_DURABLE = cast(
+    bool, config("RABBITMQ_DURABLE", cast=bool, default=False)
+)
 RABBITMQ_EXCHANGE = cast(str, config("RABBITMQ_EXCHANGE"))
 RABBITMQ_CONN_STR = cast(str, config("RABBITMQ_CONN_STR"))
 
